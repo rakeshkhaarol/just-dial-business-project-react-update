@@ -12,7 +12,7 @@ function Login() {
     let loginUser=()=>{
         //alert('hello')
 
-        let u = document.querySelector("[type='text']").value
+        let u = document.querySelector("[name='username']").value
         console.log("uuuuuuuuuuuu",u)
 
         let p = document.querySelector('[name="password"]').value
@@ -57,7 +57,7 @@ function Login() {
         <Form className='w-50'>
             <Form.Group className="mb-3 "  controlId="user">
                 <Form.Label>username</Form.Label>
-                <Form.Control name='user' type="text" placeholder="Enter user" />
+                <Form.Control name='username' type="text" placeholder="Enter user" />
                
             </Form.Group>
 

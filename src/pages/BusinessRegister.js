@@ -1,7 +1,8 @@
 //1. import area
 import React, { useEffect,useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
-import Url from '../help/Url';
+import { URL } from '../helpers/Helper';
+
 
 
 //2. definetion area
@@ -19,7 +20,7 @@ function BusinessRegister() {
     useEffect(()=>{
 
         //coll the country api 
-        fetch(`${Url}/api/countries`)
+        fetch(`${URL}/api/countries`)
         .then((res)=>{
             return res.json()
         })
@@ -36,7 +37,7 @@ function BusinessRegister() {
 
 
         //coll the business_catrgory api 
-        fetch(`${Url}/api/business-categories`)
+        fetch(`${URL}/api/business-categories`)
         .then((res)=>{
             return res.json()
         })
@@ -73,11 +74,13 @@ function BusinessRegister() {
 
         //coll the business category (bres)api 
 
+        let token = window.localStorage.getItem("jwt_token")
         
-            fetch(`${Url}/api/businesses`,{
+            fetch(`${URL}/api/businesses`,{
                 method:"POST",
                 headers:{
-                    "Content-Type":"application/json"
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer"+token
                 },
                 body:JSON.stringify(payload)
             })
@@ -103,7 +106,7 @@ function BusinessRegister() {
         console.log('e-----.............>>>>>>>>>>>',targetvalue)
 
          //coll the state api 
-         fetch(`${Url}/api/states?filters[country][id][$eq]=${targetvalue}`)
+         fetch(`${URL}/api/states?filters[country][id][$eq]=${targetvalue}`)
          .then((res)=>{
              return res.json()
          })
@@ -125,7 +128,7 @@ function BusinessRegister() {
 
         
         //coll the city api 
-        fetch(`${Url}/api/cities?filters[state][id][$eq]=${e.target.value}`)
+        fetch(`${URL}/api/cities?filters[state][id][$eq]=${e.target.value}`)
         .then((res)=>{
             return res.json()
         })
@@ -158,31 +161,36 @@ function BusinessRegister() {
                         
                     </Form.Select>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>States</Form.Label>
-                    <Form.Select name='States_id' aria-label="Default select example " onChange={(e)=>{seeCitys(e)}}>
-                        {
-                            state.map((cv,idx,arr)=>{
-                                return <option key={idx}  value={cv.id} > {cv.attributes.name}</option>
-                            })
-                        }
-                        
-                        
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>City</Form.Label>
-                    <Form.Select name='city__id' aria-label="Default select example">
-                        {
-                            cities.map((cv,idx,arr)=>{
-                                return <option key={idx}  value={cv.id} > {cv.attributes.City_name}</option>
-                            })
-                        }
-                        
-                        
-                    </Form.Select>
-                </Form.Group>
-                <br/>
+                {
+                    state.length !== 0  &&
+                    <Form.Group>
+                        <Form.Label>States</Form.Label>
+                        <Form.Select name='States_id' aria-label="Default select example " onChange={(e)=>{seeCitys(e)}}>
+                            {
+                                state.map((cv,idx,arr)=>{
+                                    return <option key={idx}  value={cv.id} > {cv.attributes.name}</option>
+                                })
+                            }
+                            
+                            
+                        </Form.Select>
+                    </Form.Group>
+                }
+                {
+                    cities.length !== 0 &&
+                    <Form.Group>
+                        <Form.Label>City</Form.Label>
+                        <Form.Select name='city__id' aria-label="Default select example">
+                            {
+                                cities.map((cv,idx,arr)=>{
+                                    return <option key={idx}  value={cv.id} > {cv.attributes.City_name}</option>
+                                })
+                            }
+                            
+                            
+                        </Form.Select>
+                    </Form.Group>
+                }
                 <Form.Group>
                     <Form.Label>Business Category</Form.Label>
                     <Form.Select name="busi_cat_id" aria-label="Default select example">

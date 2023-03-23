@@ -11,3 +11,13 @@ footer{
     border: 1px solid black;
     
 }
+
+.homedesion{
+    height: 80px;
+    width: 80px;
+    border: 1px solid gray;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 15px;
+    
+}

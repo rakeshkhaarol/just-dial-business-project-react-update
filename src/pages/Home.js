@@ -1,7 +1,8 @@
 //import area
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Url from '../help/Url';
+
+import { URL } from '../helpers/Helper';
 
 
 //definetion area
@@ -13,7 +14,7 @@ function Home() {
 
     //every hooks is a function 
     useEffect(()=>{
-        fetch(`${Url}/api/business-categories?populate=*`)
+        fetch(`${URL}/api/business-categories?populate=*`)
         .then((res)=>{
             return res.json();
         })
@@ -37,10 +38,10 @@ function Home() {
         {
           getBusiness_Category.map((cv,idx,arr)=>{
               return <ul  className=' nav nav-link '>
-                        <li key={idx} className="me-3" >
-                          <img  src ={Url+cv.attributes.image.data.attributes.url} alt='' />
+                        <li key={idx} className="me-3 homedesion" >
+                          <img  src ={URL+cv.attributes.image.data.attributes.url} alt='' />
                         </li>
-                        <li >
+                        <li className='textdesion text-center pt-2 '>
                           {cv.attributes.name}
                         </li>
                     </ul>
