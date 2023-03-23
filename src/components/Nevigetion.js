@@ -1,7 +1,7 @@
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Geocode from "react-geocode";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Button, Container, Form, Nav, Navbar} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '.././logo.svg'
@@ -11,8 +11,11 @@ import { GEO_MAP_KEY } from '../helpers/Helper';
 
 export default function Nevigetion() {
     //1hooks statment
+    const [address,setAddress] = useState([]);
+
     useEffect(()=>{
-                // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+        setAddress(window.localStorage.getItem('address'))
+        // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
         Geocode.setApiKey(GEO_MAP_KEY);
 
         // set response language. Defaults to english.
@@ -32,7 +35,7 @@ export default function Nevigetion() {
 
         // Enable or disable logs. Its optional.
         Geocode.enableDebug();              
-    })
+    },[])
 
     //2.
     const UserLogout=()=>{
@@ -53,7 +56,7 @@ export default function Nevigetion() {
        
     }
 
-    function showPosition(position) {
+    let showPosition=(position)=> {
 
         let lat = position.coords.latitude;
         let long = position.coords.longitude
@@ -72,7 +75,7 @@ export default function Nevigetion() {
               console.error(error);
             }
           );
-          window.localStorage.setItem('address', ' Neemuch');
+          window.localStorage.setItem('address', address);
           //x.value = ' Neemuch'; 
         //x.innerHTML = "Latitude: " + position.coords.latitude +
         //"<br>Longitude: " + position.coords.longitude;
@@ -96,6 +99,7 @@ export default function Nevigetion() {
                         readOnly
                         disabled
                         type="text"
+                        value={address}
                         placeholder="location"
                         className="me-2 seelocation"
                         aria-label="Search"

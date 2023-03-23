@@ -34,11 +34,11 @@ function Home() {
     //2.3 return statments
   return (
     <main>
-      <Link className='box nav mt-4 ms-3 '>
+      <Link to={"/search"} className='box nav mt-4 ms-3 '>
         {
           getBusiness_Category.map((cv,idx,arr)=>{
-              return <ul  className=' nav nav-link '>
-                        <li key={idx} className="me-3 homedesion" >
+              return <ul key={idx} className=' nav nav-link '>
+                        <li className="me-3 homedesion" >
                           <img  src ={URL+cv.attributes.image.data.attributes.url} alt='' />
                         </li>
                         <li className='textdesion text-center pt-2 '>
