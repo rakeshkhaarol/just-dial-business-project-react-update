@@ -34,23 +34,28 @@ function Home() {
     //2.3 return statments
   return (
     <main>
-      <Link to={"/search"} className='box nav mt-4 ms-3 '>
-        {
-          getBusiness_Category.map((cv,idx,arr)=>{
-              return <ul key={idx} className=' nav nav-link '>
-                        <li className="me-3 homedesion" >
-                          <img  src ={URL+cv.attributes.image.data.attributes.url} alt='' />
-                        </li>
-                        <li className='textdesion text-center pt-2 '>
-                          {cv.attributes.name}
-                        </li>
-                    </ul>
-                  })
-        }
-        
-      </Link>
+          <ul className="nav">
+            {
+                getBusiness_Category.map((cv,idx,arr)=>{
+                    return  <li key={idx} className=" pt-5 ps-3">
+                                <Link to={"/search?cat_name="+cv.attributes.name} style={{ textDecoration: 'none', color: 'black' }}>
+                                    <img className='homedesion' src={URL+cv.attributes.image.data.attributes.url} alt='' />
+                                    <div className='pt-3 text-center'>{cv.attributes.name}</div>
+                                    
+                                </Link>
+                            </li>
+                })
+            }
+           
+            
+        </ul>
     </main>
   )
 }
 
 export default Home
+
+
+
+
+

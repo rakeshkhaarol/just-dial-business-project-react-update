@@ -3,7 +3,7 @@ header{
     border: 1px solid black;
 }
 main{
-    height: 1000px;
+    min-height: 1000px;
     border: 1px solid black;
 }
 footer{
@@ -22,8 +22,17 @@ footer{
     
 }
 .bus_cat_search_img{
-    border-radius: 20px;
+    border-radius: 12px;
+    height: 150px;
+    width: 150px;
+  
 }
-.cart_search{
-    height: 300px;
+.r_btn{
+    border-radius: 5px;
+    text-decoration: none;
+    
+}
+.r_spam{
+    border: 1px solid #0076D7;
+    height: 25px;
 }
